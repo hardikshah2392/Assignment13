@@ -11,12 +11,12 @@ class ProductForm extends Component {
         let instock = this.state.product.instock;
 
         let errors = {}
-
-        if(name === "") {
-            errors['name'] = "name error"
+        if(instock === ""){
+            errors['price'] = "price error"
             this.setState({errors:errors})
             return false
-        }  
+        }
+
         if(category === "") {
             errors['category'] = "category error"
             this.setState({errors:errors})
@@ -27,11 +27,11 @@ class ProductForm extends Component {
             this.setState({errors:errors})
             return false
         }
-        if(instock === ""){
-            errors['price'] = "price error"
+        if(name === "") {
+            errors['name'] = "name error"
             this.setState({errors:errors})
             return false
-        }
+        }  
         return true;
     }
 
@@ -74,7 +74,18 @@ class ProductForm extends Component {
     }
 
 
-    onRadioChange = (newValue) => {
+    evChange = (event) => {
+        const target = event.target    
+        const name = target.name
+        const value = target.value
+
+        this.setState((prevState) => {
+             prevState.product[name] = value
+             return { product: prevState.product }
+        })
+    }
+
+    evRadioChange = (newValue) => {
         this.setState({
             selectedOption: newValue.target.value
           });
@@ -92,17 +103,6 @@ class ProductForm extends Component {
         })
     }
 
-    onChange = (event) => {
-        const target = event.target    
-        const name = target.name
-        const value = target.value
-
-        this.setState((prevState) => {
-             prevState.product[name] = value
-             return { product: prevState.product }
-        })
-    }
-
     render() {
         return (
             <div>
@@ -111,24 +111,24 @@ class ProductForm extends Component {
                     <form> 
                         <div className="form-group">
                             <label htmlFor="productName"><strong>Name</strong></label><br/>
-                            <input placeholder="Enter Product Name" className="form-control" id="productName" type="text" onChange={this.onChange} value={this.state.product.name} name="name"></input><br/><br/>
+                            <input placeholder="Enter Product Name" className="form-control" id="productName" type="text" onChange={this.evChange} value={this.state.product.name} name="name"></input><br/><br/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="productCategory"><strong>Category</strong></label><br/>
                             <input placeholder="Enter Category"
-                            className="form-control" id="productCategory" type="text" onChange={this.onChange} value={this.state.product.category} name="category"></input><br/><br/>
+                            className="form-control" id="productCategory" type="text" onChange={this.evChange} value={this.state.product.category} name="category"></input><br/><br/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="productPrice"><strong>Price</strong></label><br/>
-                            <input className="form-control" placeholder="Enter Price" id="productPrice" type="text" onChange={this.onChange} value={this.state.product.price} name="price"></input><br/><br/>
+                            <input className="form-control" placeholder="Enter Price" id="productPrice" type="text" onChange={this.evChange} value={this.state.product.price} name="price"></input><br/><br/>
                         </div>
 
                         <div className="form-group">
                     
-                    <input className="form-group-input" type="radio" value="In Stock" checked={this.state.product.instock === true} onChange={this.onRadioChange}/>
+                    <input className="form-group-input" type="radio" value="In Stock" checked={this.state.product.instock === true} onChange={this.evRadioChange}/>
                     <label className="form-group-label">In Stock</label>
                     <br/>
-                    <input className="form-group-input" type="radio" value="Out Stock" checked={this.state.product.instock === false} onChange={this.onRadioChange}/>
+                    <input className="form-group-input" type="radio" value="Out Stock" checked={this.state.product.instock === false} onChange={this.evRadioChange}/>
                     <label className="form-group-label">Out of Stock</label><br/><br/>
                 </div>
 

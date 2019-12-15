@@ -6,7 +6,7 @@ import ProductForm from './ProductForm';
 
 class Product extends Component {
 
-onDelete = (productId) => {
+onDeleteItem = (productId) => {
     
   this.setState((prevState) => {
       var products = prevState.products
@@ -23,7 +23,7 @@ onDelete = (productId) => {
   }).then(response => {console.log("Deletion successful!" ,response)}).catch(error =>{console.log(error)})
 }
 
-onUpdate = (updatedProduct) => {
+onUpdateItem = (updatedProduct) => {
 
   this.setState((prevState) => {
     var products = prevState.products
@@ -44,9 +44,6 @@ fetch(`/product/update/${productId}`,{
 }).then(response => {console.log("Update successful",response)}).catch(error =>{console.log(error)})
 }
 
-onFilterChange = (filterInput) => {
-  this.setState(filterInput);
-}
 
 onSubmitForm = (newProduct) => {
   
@@ -73,6 +70,9 @@ onSubmitForm = (newProduct) => {
   })
 }
 
+onFilterChange = (filterInput) => {
+  this.setState(filterInput);
+}
 
 populateForm = (productId) => {
   let modifiedProduct = this.state.products[productId]
@@ -106,13 +106,13 @@ componentDidMount() {
             <ProductTable 
                 products ={this.state.products} 
                 filterText ={this.state.filterText}
-                onDelete ={this.onDelete}
+                onDelete ={this.onDeleteItem}
                 onModify = {this.populateForm}
-                onUpdate = {this.onUpdate}
+                onUpdate = {this.onUpdateItem}
                 />
             <ProductForm
                 onSubmit={this.onSubmitForm}
-                onUpdate={this.onUpdate}
+                onUpdate={this.onUpdateItem}
                 ref={this.child}
 
                 />

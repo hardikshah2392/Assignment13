@@ -2,15 +2,16 @@ import React,{Component} from 'react'
 
 class ProductRow extends Component {
     
-   delete = () => {
+    modifyItem = () => {
+        let id = this.props.product.productId;
+        this.props.onModify(id);
+    }
+
+   
+    deleteItem = () => {
         let id = this.props.product.productId
         console.log("row",id)
         this.props.onDelete(id);
-   }
-
-   modify = () => {
-    let id = this.props.product.productId;
-    this.props.onModify(id);
    }
 
     render() {
@@ -21,10 +22,10 @@ class ProductRow extends Component {
                 <td>{this.props.product.category}</td>
                 <td>{this.props.product.instock == true ? "In Stock" : "No Stock"}</td>
                 <td>
-                    <button className="btn btn-info" type="button" onClick={this.delete}>Delete</button>
+                    <button className="btn" type="button" onClick={this.deleteItem}>Delete</button>
                 </td>
                 <td>
-                <button className="btn btn-info" type="button" onClick={this.modify}>Modify</button>
+                <button className="btn" type="button" onClick={this.modifyItem}>Modify</button>
                 </td>
 
             </tr>

@@ -4,11 +4,11 @@ import ProductRow from './ProductRow'
 
 class ProductTable extends Component {
     
-    onDelete = (id) => {
+    onDeleteItem = (id) => {
         this.props.onDelete(id)
     }
 
-    onModify = (id) => {
+    onModifyItem = (id) => {
         this.props.onModify(id)
     }
 
@@ -18,8 +18,8 @@ class ProductTable extends Component {
 
         return (
             <div>
-                <table className="table table-striped">
-                    <thead className="thead-dark">
+                <table className="table">
+                    <thead className="thead-light">
                         <tr>
                             <th>Name</th>
                             <th>Price</th>
@@ -38,8 +38,8 @@ class ProductTable extends Component {
                                         <ProductRow 
                                             key = {products[item].productId} 
                                             product = {products[item]}
-                                            onDelete={this.onDelete}
-                                            onModify={this.onModify}
+                                            onDelete={this.onDeleteItem}
+                                            onModify={this.onModifyItem}
                                         />
                                     )
                                 }
