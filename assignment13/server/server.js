@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var app = express();
 app.use(bodyParser.json());
 
-var DB_URL = 'mongodb+srv://hardikshah:user@assignment13-w6slo.mongodb.net/test?retryWrites=true&w=majority';
+var DB_URL = 'mongodb+srv://hardik:user@final-gsfna.mongodb.net/test?retryWrites=true&w=majority';
 
 var Product = mongoose.model('product', {
     product: {
